@@ -1,8 +1,5 @@
 package com.kpsec.test.model.entity;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,42 +17,37 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(
-        indexes = {@Index(columnList = "account_no")}
+        indexes = {@Index(columnList = "branch_code")}
 )
 @NaturalIdCache
-public class Account extends Base implements Serializable {
+public class Branch extends Base implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "account_id")
+    @Column(name = "branch_id")
     private Long id;
 
     @NaturalId
-    @Column(name = "account_no", unique = true, nullable = false, length = 191)
-    private String accountNo;
+    @Column(name = "branch_code", unique = true, nullable = false, length = 191)
+    private String branchCode;
 
     @Column(length = 191)
-    private String accountName;
-
-    @ManyToOne
-    @JoinColumn(name = "branch_code", nullable = false, referencedColumnName = "branch_code")
-    @JsonBackReference
-    private Branch branch;
+    private String branchName;
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Account)) {
+        if (!(obj instanceof Branch)) {
             return false;
         }
-        Account that = (Account) obj;
-        return Objects.equals(accountNo, that.accountNo);
+        Branch that = (Branch) obj;
+        return Objects.equals(branchCode, that.branchCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNo);
+        return Objects.hash(branchCode);
     }
 }

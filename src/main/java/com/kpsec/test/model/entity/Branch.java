@@ -20,10 +20,15 @@ import java.util.Objects;
         indexes = {@Index(columnList = "branch_code")}
 )
 @NaturalIdCache
+@SequenceGenerator(
+        name = "branch_seq_generator",
+        sequenceName = "branch_seq",
+        initialValue = 1, allocationSize = 1
+)
 public class Branch extends Base implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_seq_generator")
     @Column(name = "branch_id")
     private Long id;
 

@@ -22,10 +22,15 @@ import java.util.Objects;
         indexes = {@Index(columnList = "account_no")}
 )
 @NaturalIdCache
+@SequenceGenerator(
+        name = "account_seq_generator",
+        sequenceName = "account_seq",
+        initialValue = 1, allocationSize = 1
+)
 public class Account extends Base implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq_generator")
     @Column(name = "account_id")
     private Long id;
 

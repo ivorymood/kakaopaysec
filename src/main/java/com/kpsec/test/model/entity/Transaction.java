@@ -21,10 +21,15 @@ import java.util.Objects;
 @Table(
         uniqueConstraints = {@UniqueConstraint(columnNames = {"date", "transaction_no"})}
 )
+@SequenceGenerator(
+        name = "transaction_seq_generator",
+        sequenceName = "transaction_seq",
+        initialValue = 1, allocationSize = 1
+)
 public class Transaction extends Base {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_seq_generator")
     @Column(name = "transaction_id")
     private Long id;
 

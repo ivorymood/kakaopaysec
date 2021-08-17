@@ -1,4 +1,4 @@
-package com.kpsec.test.model.entity;
+package com.kpsec.test.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

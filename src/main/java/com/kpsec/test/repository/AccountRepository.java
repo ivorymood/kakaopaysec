@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.kpsec.test.model.AccountResult;
-import com.kpsec.test.model.entity.Account;
+import com.kpsec.test.domain.AccountResult;
+import com.kpsec.test.domain.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 

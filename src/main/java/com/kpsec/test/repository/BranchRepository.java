@@ -1,6 +1,6 @@
 package com.kpsec.test.repository;
 
-import com.kpsec.test.model.entity.Branch;
+import com.kpsec.test.domain.entity.Branch;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

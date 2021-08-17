@@ -1,9 +1,9 @@
 package com.kpsec.test.infra;
 
-import com.kpsec.test.model.code.CancelStatus;
-import com.kpsec.test.model.entity.Account;
-import com.kpsec.test.model.entity.Branch;
-import com.kpsec.test.model.entity.Transaction;
+import com.kpsec.test.domain.code.CancelStatus;
+import com.kpsec.test.domain.entity.Account;
+import com.kpsec.test.domain.entity.Branch;
+import com.kpsec.test.domain.entity.Transaction;
 import com.kpsec.test.repository.AccountRepository;
 import com.kpsec.test.repository.BranchRepository;
 import com.kpsec.test.repository.TransactionRepository;

@@ -1,4 +1,4 @@
-package com.kpsec.test.model;
+package com.kpsec.test.domain;
 
 public interface AccountResult {
     String getAccountNo();

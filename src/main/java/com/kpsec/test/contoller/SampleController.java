@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kpsec.test.model.AccountResult;
+import com.kpsec.test.domain.AccountResult;
 import com.kpsec.test.service.AccountService;
 
 import io.swagger.annotations.Api;

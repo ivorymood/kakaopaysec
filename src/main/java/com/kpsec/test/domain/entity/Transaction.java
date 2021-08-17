@@ -1,7 +1,7 @@
-package com.kpsec.test.model.entity;
+package com.kpsec.test.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.kpsec.test.model.code.CancelStatus;
+import com.kpsec.test.domain.code.CancelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

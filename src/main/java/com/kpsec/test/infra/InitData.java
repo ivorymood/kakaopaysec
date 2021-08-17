@@ -1,6 +1,6 @@
 package com.kpsec.test.infra;
 
-import com.kpsec.test.model.code.TransactionStatus;
+import com.kpsec.test.model.code.CancelStatus;
 import com.kpsec.test.model.entity.Account;
 import com.kpsec.test.model.entity.Branch;
 import com.kpsec.test.model.entity.Transaction;
@@ -87,10 +87,10 @@ public class InitData {
                                 .transactionNo(Long.parseLong(split[2]))
                                 .amount(new BigDecimal(split[3]))
                                 .fee(new BigDecimal(split[4]))
-                                .transactionStatus(
+                                .cancelStatus(
                                         split[5].equals("Y")
-                                                ? TransactionStatus.CANCELED
-                                                : TransactionStatus.COMPLETED)
+                                                ? CancelStatus.Y
+                                                : CancelStatus.N)
                                 .build();
                     }).collect(Collectors.toList());
             transactionRepository.saveAll(transactionList);

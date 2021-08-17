@@ -1,7 +1,7 @@
 package com.kpsec.test.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.kpsec.test.model.code.TransactionStatus;
+import com.kpsec.test.model.code.CancelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,7 +47,7 @@ public class Transaction extends Base {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "canceled")
-    private TransactionStatus transactionStatus;
+    private CancelStatus cancelStatus;
 
     @Override
     public boolean equals(Object obj) {

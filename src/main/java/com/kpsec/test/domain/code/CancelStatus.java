@@ -1,4 +1,4 @@
-package com.kpsec.test.model.code;
+package com.kpsec.test.domain.code;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

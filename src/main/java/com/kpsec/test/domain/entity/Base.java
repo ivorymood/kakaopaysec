@@ -1,4 +1,4 @@
-package com.kpsec.test.model.entity;
+package com.kpsec.test.domain.entity;
 
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;

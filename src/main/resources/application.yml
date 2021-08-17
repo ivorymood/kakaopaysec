@@ -7,8 +7,8 @@ server:
       enabled: true
       force: true
 
-# h2
 spring:
+  # h2
   datasource:
     url: jdbc:h2:mem:kpsecdb;MODE=MySQL
     platform: h2
@@ -27,7 +27,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  
+    show-sql: true
+    database: h2
+
   #devtool      
   devtools:
     livereload:

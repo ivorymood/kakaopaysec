@@ -1,4 +1,4 @@
-package com.kpsec.test.repository;
+package com.kpsec.test.repository.account;
 
 import java.util.List;
 import java.util.Optional;

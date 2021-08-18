@@ -34,7 +34,7 @@ public class Transaction extends Base {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private String date;
 
     @ManyToOne
     @JoinColumn(name = "account_no", nullable = false, referencedColumnName = "account_no")

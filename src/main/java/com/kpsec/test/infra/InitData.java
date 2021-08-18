@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,7 +72,6 @@ public class InitData {
     private void initTransactionHistory() throws IOException {
         if (transactionRepository.count() == 0) {
             Resource resource = new ClassPathResource("transaction.csv");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
             List<Transaction> transactionList = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8)
                     .stream().skip(1).map(line -> {
                         String[] split = line.split(",");
@@ -82,7 +79,7 @@ public class InitData {
                                 .orElseThrow(null);
 
                         return Transaction.builder()
-                                .date(LocalDate.parse(split[0], formatter))
+                                .date(split[0])
                                 .account(account)
                                 .transactionNo(Long.parseLong(split[2]))
                                 .amount(new BigDecimal(split[3]))

@@ -17,7 +17,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(
-        indexes = {@Index(columnList = "branch_code")}
+        name = "branch",
+        indexes = {@Index(name = "idx_branch", unique = true, columnList = "branch_code")}
 )
 @NaturalIdCache
 @SequenceGenerator(
@@ -36,7 +37,7 @@ public class Branch extends Base implements Serializable {
     @Column(name = "branch_code", unique = true, nullable = false, length = 191)
     private String branchCode;
 
-    @Column(length = 191)
+    @Column(name = "branch_name", length = 191)
     private String branchName;
 
     @Override

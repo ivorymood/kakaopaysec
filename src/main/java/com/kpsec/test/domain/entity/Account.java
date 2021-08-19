@@ -19,7 +19,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(
-        indexes = {@Index(columnList = "account_no")}
+        name = "account",
+        indexes = {@Index(name = "idx_account", unique = true, columnList = "account_no")}
 )
 @NaturalIdCache
 @SequenceGenerator(
@@ -38,7 +39,7 @@ public class Account extends Base implements Serializable {
     @Column(name = "account_no", unique = true, nullable = false, length = 191)
     private String accountNo;
 
-    @Column(length = 191)
+    @Column(name = "account_name", length = 191)
     private String accountName;
 
     @ManyToOne

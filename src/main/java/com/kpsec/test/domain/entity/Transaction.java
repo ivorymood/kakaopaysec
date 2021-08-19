@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Builder
@@ -19,6 +18,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(
+        name = "transaction",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"date", "transaction_no"})}
 )
 @SequenceGenerator(

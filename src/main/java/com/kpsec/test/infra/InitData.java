@@ -3,10 +3,13 @@ package com.kpsec.test.infra;
 import com.kpsec.test.domain.code.CancelStatus;
 import com.kpsec.test.domain.entity.Account;
 import com.kpsec.test.domain.entity.Branch;
+import com.kpsec.test.domain.entity.Statistics;
 import com.kpsec.test.domain.entity.Transaction;
 import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
+import com.kpsec.test.repository.statistics.StatisticsRepository;
 import com.kpsec.test.repository.transaction.TransactionRepository;
+import com.kpsec.test.vo.TransactionStatisticsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -31,6 +34,9 @@ public class InitData {
 
     @Autowired
     TransactionRepository transactionRepository;
+
+    @Autowired
+    StatisticsRepository statisticsRepository;
 
     @PostConstruct
     private void initBranch() throws IOException {
@@ -69,7 +75,7 @@ public class InitData {
     }
 
     @PostConstruct
-    private void initTransactionHistory() throws IOException {
+    private void initTransaction() throws IOException {
         if (transactionRepository.count() == 0) {
             Resource resource = new ClassPathResource("transaction.csv");
             List<Transaction> transactionList = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8)
@@ -92,5 +98,20 @@ public class InitData {
                     }).collect(Collectors.toList());
             transactionRepository.saveAll(transactionList);
         }
+    }
+
+    @PostConstruct
+    private void initAccountStatistics() {
+        List<TransactionStatisticsVO> accountStatisticsList = transactionRepository.getYearlyNetAmountSumByAccounts();
+
+        List<Statistics> statisticsList = accountStatisticsList.stream().map(vo -> {
+            Statistics statistics = new Statistics();
+            statistics.setYear(vo.getYear());
+            statistics.setBranchCode(vo.getBrCode());
+            statistics.setAccountNo(vo.getAcctNo());
+            statistics.setNetAmountSum(vo.getSumAmt());
+            return statistics;
+        }).collect(Collectors.toList());
+        statisticsRepository.saveAll(statisticsList);
     }
 }

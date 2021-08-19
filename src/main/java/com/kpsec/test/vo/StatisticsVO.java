@@ -2,9 +2,9 @@ package com.kpsec.test.vo;
 
 import java.math.BigDecimal;
 
-public interface AccountAmountStatisticsVO {
+public interface StatisticsVO {
 
-    int getYear();
+    String getYear();
     String getName();
     String getAcctNo();
     BigDecimal getSumAmt();

@@ -3,7 +3,7 @@ package com.kpsec.test.contoller;
 
 import com.kpsec.test.service.accountstatistics.AccountStatisticsService;
 import com.kpsec.test.service.accountstatistics.dto.YearDTO;
-import com.kpsec.test.vo.AccountAmountStatisticsVO;
+import com.kpsec.test.vo.StatisticsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class AccountStatisticsController {
             // consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<AccountAmountStatisticsVO> get1819YearlyTopAmountAccounts(
+    public List<StatisticsVO> get1819YearlyTopAmountAccounts(
            // @RequestBody @Valid List<YearDTO> list
             ) {
 

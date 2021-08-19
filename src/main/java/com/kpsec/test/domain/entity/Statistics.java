@@ -1,5 +1,6 @@
 package com.kpsec.test.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -26,7 +28,7 @@ import java.util.Objects;
         sequenceName = "statistics_seq",
         initialValue = 1, allocationSize = 1
 )
-public class Statistics {
+public class Statistics extends Base implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_statistics_seq_generator")
@@ -39,10 +41,13 @@ public class Statistics {
     @Column(name = "branch_code", nullable = false, length = 191)
     private String branchCode;
 
-    @Column(name = "account_no", nullable = false, length = 191)
-    private String accountNo;
+    @ManyToOne
+    @JoinColumn(name = "account_no", nullable = false, referencedColumnName = "account_no")
+    @JsonBackReference
+    private Account account;
 
     @Digits(integer = 19, fraction = 4)
+    @Column(name = "net_amount_sum")
     private BigDecimal netAmountSum;
 
     @Override

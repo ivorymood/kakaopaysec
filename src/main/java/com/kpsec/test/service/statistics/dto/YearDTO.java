@@ -1,4 +1,4 @@
-package com.kpsec.test.service.accountstatistics.dto;
+package com.kpsec.test.service.statistics.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

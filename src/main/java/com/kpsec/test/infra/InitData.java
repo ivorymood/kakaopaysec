@@ -108,7 +108,7 @@ public class InitData {
             Statistics statistics = new Statistics();
             statistics.setYear(vo.getYear());
             statistics.setBranchCode(vo.getBrCode());
-            statistics.setAccountNo(vo.getAcctNo());
+            statistics.setAccount(accountRepository.findByAccountNo(vo.getAcctNo()).orElse(null));
             statistics.setNetAmountSum(vo.getSumAmt());
             return statistics;
         }).collect(Collectors.toList());

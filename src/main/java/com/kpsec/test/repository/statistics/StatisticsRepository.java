@@ -1,14 +1,14 @@
 package com.kpsec.test.repository.statistics;
 
 import com.kpsec.test.domain.entity.Statistics;
-import com.kpsec.test.vo.StatisticsInterface;
+import com.kpsec.test.repository.statistics.vo.StatisticsInterface;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
+public interface StatisticsRepository extends JpaRepository<Statistics, Long>, StatisticsRepositoryCustom {
 
     @Query(value =
             "select s.year, a.account_name name, s.account_no acctNo, s.net_amount_sum sumAmt " +
@@ -24,4 +24,5 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
     List<StatisticsInterface> findAllYearlyAmountAccounts(@Param("years") List<String> years);
 
     List<Statistics> findAllByYearIsInOrderByYear(@Param("years") List<String> years);
+
 }

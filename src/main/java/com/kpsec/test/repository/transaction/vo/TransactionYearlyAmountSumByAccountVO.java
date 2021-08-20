@@ -1,4 +1,4 @@
-package com.kpsec.test.vo;
+package com.kpsec.test.repository.transaction.vo;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
@@ -8,14 +8,14 @@ import java.math.BigDecimal;
 
 @NoArgsConstructor
 @Getter
-public class YearlyTransactionAccountVO {
-    private String year;
+public class TransactionYearlyAmountSumByAccountVO {
+    private Integer year;
     private String brCode;
     private String acctNo;
     private BigDecimal sumAmt;
 
     @QueryProjection
-    public YearlyTransactionAccountVO(String year, String brCode, String acctNo, BigDecimal sumAmt) {
+    public TransactionYearlyAmountSumByAccountVO(Integer year, String brCode, String acctNo, BigDecimal sumAmt) {
         this.year = year;
         this.brCode = brCode;
         this.acctNo = acctNo;

@@ -36,7 +36,8 @@ public class Statistics extends Base implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private String year;
+    @Digits(integer = 4, fraction = 0)
+    private Integer year;
 
     @Column(name = "branch_code", nullable = false, length = 191)
     private String branchCode;

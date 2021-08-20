@@ -5,8 +5,8 @@ import com.kpsec.test.domain.entity.QAccount;
 import com.kpsec.test.domain.entity.QBranch;
 import com.kpsec.test.domain.entity.QTransaction;
 import com.kpsec.test.domain.entity.Transaction;
-import com.kpsec.test.vo.QYearlyTransactionAccountVO;
-import com.kpsec.test.vo.YearlyTransactionAccountVO;
+import com.kpsec.test.repository.transaction.vo.QTransactionYearlyAmountSumByAccountVO;
+import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumByAccountVO;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -27,13 +27,13 @@ public class TransactionRepositoryImpl extends QuerydslRepositorySupport impleme
     }
 
     @Override
-    public List<YearlyTransactionAccountVO> getYearlyNetAmountSumByAccounts() {
+    public List<TransactionYearlyAmountSumByAccountVO> getYearlyNetAmountSumByAccounts() {
 
         JPAQueryFactory query = new JPAQueryFactory(this.getEntityManager());
 
-        JPAQuery<YearlyTransactionAccountVO> jpaQuery = query.select(
-                new QYearlyTransactionAccountVO(
-                        transaction.date.substring(0, 4),
+        JPAQuery<TransactionYearlyAmountSumByAccountVO> jpaQuery = query.select(
+                new QTransactionYearlyAmountSumByAccountVO(
+                        transaction.date.substring(0, 4).castToNum(Integer.class),
                         branch.branchCode,
                         transaction.accountNo,
                         transaction.amount.subtract(transaction.fee).sum()
@@ -42,7 +42,7 @@ public class TransactionRepositoryImpl extends QuerydslRepositorySupport impleme
                 .where(transaction.cancelStatus.eq(CancelStatus.N))
                 .leftJoin(account).on(account.accountNo.eq(transaction.accountNo))
                 .leftJoin(branch).on(branch.branchCode.eq(account.branchCode))
-                .groupBy(transaction.date.substring(0, 4), transaction.accountNo);
+                .groupBy(transaction.date.substring(0, 4).castToNum(Integer.class), transaction.accountNo);
 
         return jpaQuery.fetch();
     }

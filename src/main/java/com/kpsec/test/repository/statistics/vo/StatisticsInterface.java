@@ -1,10 +1,10 @@
-package com.kpsec.test.vo;
+package com.kpsec.test.repository.statistics.vo;
 
 import java.math.BigDecimal;
 
 public interface StatisticsInterface {
 
-    String getYear();
+    Integer getYear();
     String getName();
     String getAcctNo();
     BigDecimal getSumAmt();

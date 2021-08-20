@@ -9,7 +9,7 @@ import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
 import com.kpsec.test.repository.transaction.TransactionRepository;
-import com.kpsec.test.vo.TransactionStatisticsVO;
+import com.kpsec.test.vo.YearlyTransactionAccountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -67,6 +67,7 @@ public class InitData {
                         return Account.builder()
                                 .accountNo(split[0])
                                 .accountName(split[1])
+                                .branchCode(split[2])
                                 .branch(branch)
                                 .build();
                     }).collect(Collectors.toList());
@@ -86,14 +87,14 @@ public class InitData {
 
                         return Transaction.builder()
                                 .date(split[0])
-                                .account(account)
-                                .transactionNo(Long.parseLong(split[2]))
+                                .accountNo(split[1])
+                                .transactionNo(split[2])
                                 .amount(new BigDecimal(split[3]))
                                 .fee(new BigDecimal(split[4]))
-                                .cancelStatus(
-                                        split[5].equals("Y")
+                                .cancelStatus(split[5].equals("Y")
                                                 ? CancelStatus.Y
                                                 : CancelStatus.N)
+                                .account(account)
                                 .build();
                     }).collect(Collectors.toList());
             transactionRepository.saveAll(transactionList);
@@ -101,15 +102,23 @@ public class InitData {
     }
 
     @PostConstruct
-    private void initAccountStatistics() {
-        List<TransactionStatisticsVO> accountStatisticsList = transactionRepository.getYearlyNetAmountSumByAccounts();
+    private void initStatistics() {
+        List<YearlyTransactionAccountVO> transactionStatisticsList = transactionRepository.getYearlyNetAmountSumByAccounts();
 
-        List<Statistics> statisticsList = accountStatisticsList.stream().map(vo -> {
+        List<Statistics> statisticsList = transactionStatisticsList.stream().map(vo -> {
+
+            Account account = accountRepository.findByAccountNo(vo.getAcctNo())
+                    .orElseThrow(null);
+            Branch branch = branchRepository.findByBranchCode(vo.getBrCode())
+                    .orElseThrow(null);
+
             Statistics statistics = new Statistics();
             statistics.setYear(vo.getYear());
             statistics.setBranchCode(vo.getBrCode());
-            statistics.setAccount(accountRepository.findByAccountNo(vo.getAcctNo()).orElse(null));
+            statistics.setAccountNo(vo.getAcctNo());
             statistics.setNetAmountSum(vo.getSumAmt());
+            statistics.setAccount(account);
+            statistics.setBranch(branch);
             return statistics;
         }).collect(Collectors.toList());
         statisticsRepository.saveAll(statisticsList);

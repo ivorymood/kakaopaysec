@@ -1,10 +1,10 @@
 package com.kpsec.test.repository.transaction;
 
-import com.kpsec.test.vo.TransactionStatisticsVO;
+import com.kpsec.test.vo.YearlyTransactionAccountVO;
 
 import java.util.List;
 
 public interface TransactionRepositoryCustom {
 
-    List<TransactionStatisticsVO> getYearlyNetAmountSumByAccounts();
+    List<YearlyTransactionAccountVO> getYearlyNetAmountSumByAccounts();
 }

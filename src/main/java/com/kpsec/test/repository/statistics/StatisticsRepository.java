@@ -22,4 +22,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
                     "order by year, rank ",
             nativeQuery = true)
     List<StatisticsInterface> findAllYearlyAmountAccounts(@Param("years") List<String> years);
+
+    List<Statistics> findAllByYearIsInOrderByYear(@Param("years") List<String> years);
 }

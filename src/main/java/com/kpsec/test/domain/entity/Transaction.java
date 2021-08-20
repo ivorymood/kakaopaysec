@@ -36,13 +36,11 @@ public class Transaction extends Base {
     @Column(nullable = false)
     private String date;
 
-    @ManyToOne
-    @JoinColumn(name = "account_no", nullable = false, referencedColumnName = "account_no")
-    @JsonBackReference
-    private Account account;
+    @Column(name = "account_no", nullable = false, length = 191)
+    private String accountNo;
 
-    @Column(name = "transaction_no")
-    private Long transactionNo;
+    @Column(name = "transaction_no", nullable = false, length = 191)
+    private String transactionNo;
 
     @Digits(integer = 19, fraction = 4)
     private BigDecimal amount;
@@ -53,6 +51,11 @@ public class Transaction extends Base {
     @Enumerated(EnumType.STRING)
     @Column(name = "canceled")
     private CancelStatus cancelStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false, referencedColumnName = "account_id")
+    @JsonBackReference
+    private Account account;
 
     @Override
     public boolean equals(Object obj) {

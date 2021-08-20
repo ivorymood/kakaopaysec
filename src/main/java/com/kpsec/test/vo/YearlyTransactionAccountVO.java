@@ -8,14 +8,14 @@ import java.math.BigDecimal;
 
 @NoArgsConstructor
 @Getter
-public class TransactionStatisticsVO {
+public class YearlyTransactionAccountVO {
     private String year;
     private String brCode;
     private String acctNo;
     private BigDecimal sumAmt;
 
     @QueryProjection
-    public TransactionStatisticsVO(String year, String brCode, String acctNo, BigDecimal sumAmt) {
+    public YearlyTransactionAccountVO(String year, String brCode, String acctNo, BigDecimal sumAmt) {
         this.year = year;
         this.brCode = brCode;
         this.acctNo = acctNo;

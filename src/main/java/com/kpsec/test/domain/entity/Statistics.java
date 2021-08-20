@@ -32,7 +32,7 @@ public class Statistics extends Base implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_statistics_seq_generator")
-    @Column(name = "account_statistics_id")
+    @Column(name = "statistics_id")
     private Long id;
 
     @Column(nullable = false)
@@ -41,14 +41,22 @@ public class Statistics extends Base implements Serializable {
     @Column(name = "branch_code", nullable = false, length = 191)
     private String branchCode;
 
-    @ManyToOne
-    @JoinColumn(name = "account_no", nullable = false, referencedColumnName = "account_no")
-    @JsonBackReference
-    private Account account;
+    @Column(name = "account_no", nullable = false, length = 191)
+    private String accountNo;
 
     @Digits(integer = 19, fraction = 4)
     @Column(name = "net_amount_sum")
     private BigDecimal netAmountSum;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false, referencedColumnName = "account_id")
+    @JsonBackReference
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "branch_id", nullable = false, referencedColumnName = "branch_id")
+    @JsonBackReference
+    private Branch branch;
 
     @Override
     public boolean equals(Object obj) {

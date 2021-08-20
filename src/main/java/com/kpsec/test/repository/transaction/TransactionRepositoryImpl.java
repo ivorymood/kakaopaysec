@@ -5,8 +5,8 @@ import com.kpsec.test.domain.entity.QAccount;
 import com.kpsec.test.domain.entity.QBranch;
 import com.kpsec.test.domain.entity.QTransaction;
 import com.kpsec.test.domain.entity.Transaction;
-import com.kpsec.test.vo.QTransactionStatisticsVO;
-import com.kpsec.test.vo.TransactionStatisticsVO;
+import com.kpsec.test.vo.QYearlyTransactionAccountVO;
+import com.kpsec.test.vo.YearlyTransactionAccountVO;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -27,22 +27,22 @@ public class TransactionRepositoryImpl extends QuerydslRepositorySupport impleme
     }
 
     @Override
-    public List<TransactionStatisticsVO> getYearlyNetAmountSumByAccounts() {
+    public List<YearlyTransactionAccountVO> getYearlyNetAmountSumByAccounts() {
 
         JPAQueryFactory query = new JPAQueryFactory(this.getEntityManager());
 
-        JPAQuery<TransactionStatisticsVO> jpaQuery = query.select(
-                new QTransactionStatisticsVO(
+        JPAQuery<YearlyTransactionAccountVO> jpaQuery = query.select(
+                new QYearlyTransactionAccountVO(
                         transaction.date.substring(0, 4),
                         branch.branchCode,
-                        account.accountNo,
+                        transaction.accountNo,
                         transaction.amount.subtract(transaction.fee).sum()
                 ))
                 .from(transaction)
                 .where(transaction.cancelStatus.eq(CancelStatus.N))
-                .leftJoin(account).on(account.accountNo.eq(transaction.account.accountNo))
-                .leftJoin(branch).on(branch.branchCode.eq(account.branch.branchCode))
-                .groupBy(transaction.date.substring(0, 4), transaction.account);
+                .leftJoin(account).on(account.accountNo.eq(transaction.accountNo))
+                .leftJoin(branch).on(branch.branchCode.eq(account.branchCode))
+                .groupBy(transaction.date.substring(0, 4), transaction.accountNo);
 
         return jpaQuery.fetch();
     }

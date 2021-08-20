@@ -22,7 +22,6 @@ import java.util.Objects;
         name = "account",
         indexes = {@Index(name = "idx_account", unique = true, columnList = "account_no")}
 )
-@NaturalIdCache
 @SequenceGenerator(
         name = "account_seq_generator",
         sequenceName = "account_seq",
@@ -35,15 +34,17 @@ public class Account extends Base implements Serializable {
     @Column(name = "account_id")
     private Long id;
 
-    @NaturalId
     @Column(name = "account_no", unique = true, nullable = false, length = 191)
     private String accountNo;
 
     @Column(name = "account_name", length = 191)
     private String accountName;
 
+    @Column(name = "branch_code", length = 191)
+    private String branchCode;
+
     @ManyToOne
-    @JoinColumn(name = "branch_code", nullable = false, referencedColumnName = "branch_code")
+    @JoinColumn(name = "branch_id", nullable = false, referencedColumnName = "branch_id")
     @JsonBackReference
     private Branch branch;
 

@@ -1,4 +1,4 @@
-package com.kpsec.test.vo;
+package com.kpsec.test.repository.transaction.vo;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;

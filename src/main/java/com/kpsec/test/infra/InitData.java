@@ -9,7 +9,7 @@ import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
 import com.kpsec.test.repository.transaction.TransactionRepository;
-import com.kpsec.test.vo.YearlyTransactionAccountVO;
+import com.kpsec.test.repository.transaction.vo.YearlyTransactionAccountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

@@ -3,8 +3,8 @@ package com.kpsec.test.contoller;
 
 import com.kpsec.test.service.statistics.StatisticsService;
 import com.kpsec.test.service.statistics.dto.YearDTO;
-import com.kpsec.test.vo.StatisticsInterface;
-import com.kpsec.test.vo.YearlyNonTransactionAccountVO;
+import com.kpsec.test.repository.statistics.vo.StatisticsInterface;
+import com.kpsec.test.service.statistics.vo.YearlyNonTransactionAccountVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

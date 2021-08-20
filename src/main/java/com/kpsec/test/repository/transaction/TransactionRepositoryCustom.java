@@ -1,6 +1,6 @@
 package com.kpsec.test.repository.transaction;
 
-import com.kpsec.test.vo.YearlyTransactionAccountVO;
+import com.kpsec.test.repository.transaction.vo.YearlyTransactionAccountVO;
 
 import java.util.List;
 

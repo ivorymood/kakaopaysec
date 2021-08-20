@@ -6,7 +6,7 @@ import com.kpsec.test.domain.entity.QBranch;
 import com.kpsec.test.domain.entity.QTransaction;
 import com.kpsec.test.domain.entity.Transaction;
 import com.kpsec.test.vo.QYearlyTransactionAccountVO;
-import com.kpsec.test.vo.YearlyTransactionAccountVO;
+import com.kpsec.test.repository.transaction.vo.YearlyTransactionAccountVO;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;

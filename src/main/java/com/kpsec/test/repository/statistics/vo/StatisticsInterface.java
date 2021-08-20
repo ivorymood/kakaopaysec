@@ -1,4 +1,4 @@
-package com.kpsec.test.vo;
+package com.kpsec.test.repository.statistics.vo;
 
 import java.math.BigDecimal;
 

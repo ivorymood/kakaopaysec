@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public interface StatisticsInterface {
 
-    String getYear();
+    Integer getYear();
     String getName();
     String getAcctNo();
     BigDecimal getSumAmt();

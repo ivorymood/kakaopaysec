@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class YearlyNonTransactionAccountVO {
+public class NonTransactionAccountVO {
 
-    private String year;
+    private Integer year;
     private String name;
     private String acctNo;
 }

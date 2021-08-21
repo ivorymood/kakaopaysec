@@ -2,6 +2,7 @@ package com.kpsec.test.repository.branch;
 
 import com.kpsec.test.domain.entity.Branch;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,17 +11,22 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 class BranchRepositoryTest {
 
     @Autowired
-    BranchRepository branchRepository;
+    private BranchRepository branchRepository;
 
-    @Test
-    void findByBranchCode() {
+    private Branch givenBranch;
 
+    @BeforeEach
+    void setUp() {
         // given
-        Branch givenBranch = Branch.builder()
+        givenBranch = Branch.builder()
                 .branchCode("Q")
                 .branchName("test점")
                 .build();
         branchRepository.save(givenBranch);
+    }
+
+    @Test
+    void findByBranchCode() {
 
         // when
         Branch branch = branchRepository.findByBranchCode(givenBranch.getBranchCode()).get();
@@ -33,13 +39,6 @@ class BranchRepositoryTest {
 
     @Test
     void findByBranchName() {
-
-        // given
-        Branch givenBranch = Branch.builder()
-                .branchCode("Q")
-                .branchName("test점")
-                .build();
-        branchRepository.save(givenBranch);
 
         // when
         Branch branch = branchRepository.findByBranchName(givenBranch.getBranchName()).get();

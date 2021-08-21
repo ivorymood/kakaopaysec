@@ -1,76 +1,105 @@
 package com.kpsec.test.repository.statistics;
 
+import com.kpsec.test.domain.entity.Account;
+import com.kpsec.test.domain.entity.Branch;
 import com.kpsec.test.domain.entity.Statistics;
+import com.kpsec.test.repository.account.AccountRepository;
+import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.vo.StatisticsVO;
 import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@DataJpaTest
 class StatisticsRepositoryTest {
 
     @Autowired
-    StatisticsRepository statisticsRepository;
+    private StatisticsRepository statisticsRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private BranchRepository branchRepository;
+
+    private Branch givenBranch;
+    private Account givenAccount;
+    private Statistics givenStatistics;
+
+    @BeforeEach
+    void setUp() {
+        givenBranch = Branch.builder()
+                .branchCode("Q")
+                .branchName("test점")
+                .build();
+        branchRepository.save(givenBranch);
+
+        givenAccount = Account.builder()
+                .accountNo("7777777")
+                .accountName("test")
+                .branchCode(givenBranch.getBranchCode())
+                .branch(givenBranch)
+                .build();
+        accountRepository.save(givenAccount);
+
+        givenStatistics = Statistics.builder()
+                .year(2018)
+                .branchCode(givenBranch.getBranchCode())
+                .accountNo(givenAccount.getAccountNo())
+                .netAmountSum(new BigDecimal(0))
+                .account(givenAccount)
+                .branch(givenBranch)
+                .build();
+        statisticsRepository.save(givenStatistics);
+    }
 
     @Test
     void getYearlyTopAmountAccounts() {
 
-        // given
-        List<Integer> yearList = new ArrayList<>();
-        yearList.add(2018);
-        String accountNo = "11111114";
-        BigDecimal netAmountSum = new BigDecimal(28992000);
-
         // when
+        List<Integer> yearList = new ArrayList<>();
+        yearList.add(givenStatistics.getYear());
         List<StatisticsVO> list =
                 statisticsRepository.getYearlyTopAmountAccounts(yearList);
 
         // then
         Assertions.assertThat(list).isNotEmpty();
         StatisticsVO vo = list.get(0);
-        Assertions.assertThat(vo.getAcctNo()).isEqualTo(accountNo);
-        Assertions.assertThat(vo.getSumAmt().longValue()).isEqualTo(netAmountSum.longValue());
+        Assertions.assertThat(vo.getAcctNo())
+                .isEqualTo(givenStatistics.getAccount().getAccountNo());
+        Assertions.assertThat(vo.getSumAmt().longValue())
+                .isEqualTo(givenStatistics.getNetAmountSum().longValue());
     }
 
     @Test
     void findAllByYearIsInOrderByYear() {
 
-        // given
-        List<Integer> yearList = new ArrayList<>();
-        yearList.add(2018);
-        yearList.add(2019);
-        String accountNo = "11111111";
-
         // when
+        List<Integer> yearList = new ArrayList<>();
+        yearList.add(givenStatistics.getYear());
         List<Statistics> list =
                 statisticsRepository.findAllByYearIsInOrderByYear(yearList);
 
         // then
         Assertions.assertThat(list).isNotEmpty();
-        Long count = list.stream()
-                .filter(s -> s.getAccountNo().equals(accountNo))
-                .count();
-        Assertions.assertThat(count).isEqualTo(2);
+        Statistics statistics = list.stream()
+                .filter(s -> s.getYear().equals(givenStatistics.getYear())).findAny().get();
+        Assertions.assertThat(statistics.getYear()).isEqualTo(givenStatistics.getYear());
+        Assertions.assertThat(statistics.getBranchCode()).isEqualTo(givenStatistics.getBranchCode());
+        Assertions.assertThat(statistics.getAccountNo()).isEqualTo(givenStatistics.getAccountNo());
+        Assertions.assertThat(statistics.getNetAmountSum()).isEqualTo(givenStatistics.getNetAmountSum());
+        Assertions.assertThat(statistics.getAccount()).isEqualTo(givenStatistics.getAccount());
     }
 
     @Test
     void getYearlyNetAmountSumByBranch() {
-
-        // given
-        Integer year = 2018;
-        String branchName = "잠실점";
-        String branchCode = "D";
-        BigDecimal netAmountSum = new BigDecimal(14000000);
-        int order = 3;
 
         // when
         List<StatisticsYearlyAmountSumBranchVO> list =
@@ -78,25 +107,24 @@ class StatisticsRepositoryTest {
 
         // then
         Assertions.assertThat(list).isNotEmpty();
-        StatisticsYearlyAmountSumBranchVO vo = list.get(order);
-        Assertions.assertThat(vo.getYear()).isEqualTo(year);
-        Assertions.assertThat(vo.getBranchName()).isEqualTo(branchName);
-        Assertions.assertThat(vo.getBranchCode()).isEqualTo(branchCode);
-        Assertions.assertThat(vo.getNetAmountSum().longValue()).isEqualTo(netAmountSum.longValue());
+        StatisticsYearlyAmountSumBranchVO vo = list.get(0);
+        Assertions.assertThat(vo.getYear()).isEqualTo(givenStatistics.getYear());
+        Assertions.assertThat(vo.getBranchName()).isEqualTo(givenStatistics.getBranch().getBranchName());
+        Assertions.assertThat(vo.getBranchCode()).isEqualTo(givenStatistics.getBranchCode());
+        Assertions.assertThat(vo.getNetAmountSum().longValue())
+                .isEqualTo(givenStatistics.getNetAmountSum().longValue());
     }
 
     @Test
     void getTotalSumByBranchName() {
 
-        // given
-        String branchCode = "C";
-        BigDecimal netAmountSum = new BigDecimal(39732867);
-
         // when
-        BigDecimal totalSum = statisticsRepository.getTotalSumByBranchCode(branchCode).get();
+        BigDecimal totalSum = statisticsRepository
+                .getTotalSumByBranchCode(givenBranch.getBranchCode()).get();
 
         // then
         Assertions.assertThat(totalSum).isNotNull();
-        Assertions.assertThat(totalSum.longValue()).isEqualTo(netAmountSum.longValue());
+        Assertions.assertThat(totalSum.longValue())
+                .isEqualTo(givenStatistics.getNetAmountSum().longValue());
     }
 }

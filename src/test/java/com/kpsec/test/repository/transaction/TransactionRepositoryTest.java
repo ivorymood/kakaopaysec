@@ -8,6 +8,7 @@ import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumAccountVO;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -19,33 +20,36 @@ import java.util.List;
 class TransactionRepositoryTest {
 
     @Autowired
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    BranchRepository branchRepository;
+    private BranchRepository branchRepository;
 
-    @Test
-    void getYearlyNetAmountSumByAccounts() {
+    private Branch givenBranch;
+    private Account givenAccount;
+    private Transaction givenTransaction;
+    private int givenYear;
 
-        // given
-        Branch givenBranch = Branch.builder()
+    @BeforeEach
+    void setUp() {
+        givenBranch = Branch.builder()
                 .branchCode("Q")
                 .branchName("test점")
                 .build();
         branchRepository.save(givenBranch);
 
-        Account givenAccount = Account.builder()
+        givenAccount = Account.builder()
                 .accountNo("7777777")
                 .accountName("test")
-                .branchCode("Q")
+                .branchCode(givenBranch.getBranchCode())
                 .branch(givenBranch)
                 .build();
         accountRepository.save(givenAccount);
 
-        Transaction givenTransaction = Transaction.builder()
+        givenTransaction = Transaction.builder()
                 .date("20180101")
                 .accountNo(givenAccount.getAccountNo())
                 .transactionNo("1")
@@ -56,14 +60,18 @@ class TransactionRepositoryTest {
                 .build();
         transactionRepository.save(givenTransaction);
 
+        givenYear = Integer.parseInt(givenTransaction.getDate().substring(0, 4));
+    }
+
+    @Test
+    void getYearlyNetAmountSumByAccounts() {
+
         // when
         List<TransactionYearlyAmountSumAccountVO> list =
                 transactionRepository.getYearlyNetAmountSumByAccounts();
 
         // then
         Assertions.assertThat(list).isNotEmpty();
-
-        int givenYear = Integer.parseInt(givenTransaction.getDate().substring(0, 4));
         TransactionYearlyAmountSumAccountVO vo = list.stream()
                 .filter(v ->
                         v.getYear().equals(givenYear)

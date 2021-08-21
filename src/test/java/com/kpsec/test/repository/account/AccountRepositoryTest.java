@@ -4,38 +4,43 @@ import com.kpsec.test.domain.entity.Account;
 import com.kpsec.test.domain.entity.Branch;
 import com.kpsec.test.repository.branch.BranchRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
 class AccountRepositoryTest {
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    BranchRepository branchRepository;
+    private BranchRepository branchRepository;
 
-    @Test
-    @Transactional
-    void findByAccountNo() {
+    private Branch givenBranch;
+    private Account givenAccount;
 
+    @BeforeEach
+    void setUp() {
         // given
-        Branch givenBranch = Branch.builder()
+        givenBranch = Branch.builder()
                 .branchCode("Q")
                 .branchName("test점")
                 .build();
         branchRepository.save(givenBranch);
 
-        Account givenAccount = Account.builder()
+        givenAccount = Account.builder()
                 .accountNo("7777777")
                 .accountName("test")
-                .branchCode("Q")
+                .branchCode(givenBranch.getBranchCode())
                 .branch(givenBranch)
                 .build();
         accountRepository.save(givenAccount);
+    }
+
+    @Test
+    void findByAccountNo() {
 
         // when
         Account account = accountRepository.findByAccountNo(givenAccount.getAccountNo()).get();

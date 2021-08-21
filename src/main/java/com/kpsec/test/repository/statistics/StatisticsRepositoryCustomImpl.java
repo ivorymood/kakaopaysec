@@ -23,9 +23,7 @@ public class StatisticsRepositoryCustomImpl extends QuerydslRepositorySupport im
     }
 
     @Override
-    public List<StatisticsYearlyAmountSumBranchVO> getYearlyNetAmountSumByAccounts() {
-
-        JPAQueryFactory query = new JPAQueryFactory(this.getEntityManager());
+    public List<StatisticsYearlyAmountSumBranchVO> getYearlyNetAmountSumByBranch() {
 
         JPAQuery<StatisticsYearlyAmountSumBranchVO> jpaQuery = query.select(
                 new QStatisticsYearlyAmountSumBranchVO(

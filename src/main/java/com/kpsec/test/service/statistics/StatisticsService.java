@@ -75,7 +75,7 @@ public class StatisticsService {
 
     public List<YearlyAmountSumBranchVO> getYearlyAmountSumByBranch() {
 
-        List<StatisticsYearlyAmountSumBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByAccounts();
+        List<StatisticsYearlyAmountSumBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByBranch();
 
         Map<Integer, List<AmountSumBranchVO>> map = new HashMap<>();
         for (StatisticsYearlyAmountSumBranchVO vo : statisticsList) {

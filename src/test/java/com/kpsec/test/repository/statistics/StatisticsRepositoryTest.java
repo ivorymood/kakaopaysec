@@ -35,6 +35,7 @@ class StatisticsRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        // given
         givenBranch = Branch.builder()
                 .branchCode("Q")
                 .branchName("test점")

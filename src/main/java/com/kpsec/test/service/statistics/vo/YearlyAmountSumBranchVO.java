@@ -12,5 +12,5 @@ import java.util.List;
 public class YearlyAmountSumBranchVO {
 
     private Integer year;
-    private List<AmountSumBranchVO> dataList;
+    private List<TotalAmountSumBranchVO> dataList;
 }

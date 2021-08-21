@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class StatisticsRepositoryCustomImpl extends QuerydslRepositorySupport implements StatisticsRepositoryCustom {
 
@@ -45,7 +46,7 @@ public class StatisticsRepositoryCustomImpl extends QuerydslRepositorySupport im
     }
 
     @Override
-    public BigDecimal getTotalSumByBranchName(String branchCode) {
+    public Optional<BigDecimal> getTotalSumByBranchCode(String branchCode) {
 
         JPAQuery<BigDecimal> jpaQuery = query.select(statistics.netAmountSum.sum())
                 .from(statistics)
@@ -55,6 +56,6 @@ public class StatisticsRepositoryCustomImpl extends QuerydslRepositorySupport im
                                 .where(branch.branchCode.eq(branchCode)
                                         .or(branch.mergedTo.eq(branchCode)))));
 
-        return jpaQuery.fetchFirst();
+        return Optional.of(jpaQuery.fetchFirst());
     }
 }

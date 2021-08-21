@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class AmountSumBranchVO {
+public class TotalAmountSumBranchVO {
     private String brName;
     private String brCode;
     private BigDecimal sumAmt;

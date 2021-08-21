@@ -11,7 +11,7 @@ import com.kpsec.test.repository.statistics.StatisticsRepository;
 import com.kpsec.test.repository.statistics.vo.StatisticsVO;
 import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
 import com.kpsec.test.service.statistics.dto.YearDTO;
-import com.kpsec.test.service.statistics.vo.AmountSumBranchVO;
+import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
 import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
 import com.kpsec.test.service.statistics.vo.YearlyAmountSumBranchVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,23 +77,23 @@ public class StatisticsService {
 
         List<StatisticsYearlyAmountSumBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByBranch();
 
-        Map<Integer, List<AmountSumBranchVO>> map = new HashMap<>();
+        Map<Integer, List<TotalAmountSumBranchVO>> map = new HashMap<>();
         for (StatisticsYearlyAmountSumBranchVO vo : statisticsList) {
             if (!map.containsKey(vo.getYear())) {
                 map.put(vo.getYear(), new ArrayList<>());
             }
             map.get(vo.getYear())
-                    .add(new AmountSumBranchVO(vo.getBranchName(), vo.getBranchCode(), vo.getNetAmountSum()));
+                    .add(new TotalAmountSumBranchVO(vo.getBranchName(), vo.getBranchCode(), vo.getNetAmountSum()));
         }
 
         List<YearlyAmountSumBranchVO> resultList = new ArrayList<>();
-        for (Map.Entry<Integer, List<AmountSumBranchVO>> entry : map.entrySet()) {
+        for (Map.Entry<Integer, List<TotalAmountSumBranchVO>> entry : map.entrySet()) {
             resultList.add(new YearlyAmountSumBranchVO(entry.getKey(), entry.getValue()));
         }
         return resultList;
     }
 
-    public AmountSumBranchVO getAmountSumByBranch(String branchName) {
+    public TotalAmountSumBranchVO getTotalAmountSumByBranch(String branchName) {
 
         final String BRANCH_BUNDANG = "분당점";
         if (BRANCH_BUNDANG.equals(branchName)) {
@@ -102,8 +102,9 @@ public class StatisticsService {
 
         Branch branch = branchRepository.findByBranchName(branchName)
                 .orElseThrow(() -> new NotFoundException(ResourceNotFoundExceptionCode.BRANCH_NOT_FOUND));
-        BigDecimal sum = statisticsRepository.getTotalSumByBranchName(branch.getBranchCode());
+        BigDecimal sum = statisticsRepository.getTotalSumByBranchCode(branch.getBranchCode())
+                .orElse(BigDecimal.ZERO);
 
-        return new AmountSumBranchVO(branch.getBranchName(), branch.getBranchCode(), sum);
+        return new TotalAmountSumBranchVO(branch.getBranchName(), branch.getBranchCode(), sum);
     }
 }

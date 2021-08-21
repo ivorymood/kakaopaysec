@@ -4,7 +4,7 @@ package com.kpsec.test.contoller;
 import com.kpsec.test.repository.statistics.vo.StatisticsVO;
 import com.kpsec.test.service.statistics.StatisticsService;
 import com.kpsec.test.service.statistics.dto.YearDTO;
-import com.kpsec.test.service.statistics.vo.AmountSumBranchVO;
+import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
 import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
 import com.kpsec.test.service.statistics.vo.YearlyAmountSumBranchVO;
 import io.swagger.annotations.Api;
@@ -98,8 +98,8 @@ public class StatisticsController {
     @ApiOperation(value = "total amount sum by branch")
     @GetMapping(value = "/total-amount-sum-by-branch", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public AmountSumBranchVO getAmountSumByBranch(@RequestParam("brName") String branchName) {
+    public TotalAmountSumBranchVO getTotalAmountSumByBranch(@RequestParam("brName") String branchName) {
 
-        return statisticsService.getAmountSumByBranch(branchName);
+        return statisticsService.getTotalAmountSumByBranch(branchName);
     }
 }

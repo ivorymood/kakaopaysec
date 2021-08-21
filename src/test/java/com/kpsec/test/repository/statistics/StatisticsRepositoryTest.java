@@ -5,16 +5,16 @@ import com.kpsec.test.repository.statistics.vo.StatisticsVO;
 import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class StatisticsRepositoryTest {
 
@@ -89,11 +89,11 @@ class StatisticsRepositoryTest {
     void getTotalSumByBranchName() {
 
         // given
-        String branchName = "강남점";
+        String branchCode = "C";
         BigDecimal netAmountSum = new BigDecimal(39732867);
 
         // when
-        BigDecimal totalSum = statisticsRepository.getTotalSumByBranchName(branchName);
+        BigDecimal totalSum = statisticsRepository.getTotalSumByBranchCode(branchCode).get();
 
         // then
         Assertions.assertThat(totalSum).isNotNull();

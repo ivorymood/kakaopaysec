@@ -40,7 +40,7 @@ class AccountRepositoryTest {
     }
 
     @Test
-    void findByAccountNo() {
+    void findByAccountNoTest() {
 
         // when
         Account account = accountRepository.findByAccountNo(givenAccount.getAccountNo()).get();

@@ -62,7 +62,7 @@ class StatisticsRepositoryTest {
     }
 
     @Test
-    void getYearlyTopAmountAccounts() {
+    void getYearlyTopAmountAccountsTest() {
 
         // when
         List<Integer> yearList = new ArrayList<>();
@@ -80,7 +80,7 @@ class StatisticsRepositoryTest {
     }
 
     @Test
-    void findAllByYearIsInOrderByYear() {
+    void findAllByYearIsInOrderByYearTest() {
 
         // when
         List<Integer> yearList = new ArrayList<>();
@@ -100,7 +100,7 @@ class StatisticsRepositoryTest {
     }
 
     @Test
-    void getYearlyNetAmountSumByBranch() {
+    void getYearlyNetAmountSumByBranchTest() {
 
         // when
         List<StatisticsYearlyAmountSumBranchVO> list =
@@ -117,7 +117,7 @@ class StatisticsRepositoryTest {
     }
 
     @Test
-    void getTotalSumByBranchName() {
+    void getTotalSumByBranchNameTest() {
 
         // when
         BigDecimal totalSum = statisticsRepository

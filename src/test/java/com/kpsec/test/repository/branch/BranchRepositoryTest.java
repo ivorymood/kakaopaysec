@@ -26,7 +26,7 @@ class BranchRepositoryTest {
     }
 
     @Test
-    void findByBranchCode() {
+    void findByBranchCodeTest() {
 
         // when
         Branch branch = branchRepository.findByBranchCode(givenBranch.getBranchCode()).get();
@@ -38,7 +38,7 @@ class BranchRepositoryTest {
     }
 
     @Test
-    void findByBranchName() {
+    void findByBranchNameTest() {
 
         // when
         Branch branch = branchRepository.findByBranchName(givenBranch.getBranchName()).get();

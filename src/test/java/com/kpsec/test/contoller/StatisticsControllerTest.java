@@ -1,21 +1,17 @@
 package com.kpsec.test.contoller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kpsec.test.service.statistics.StatisticsService;
 import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -53,7 +49,7 @@ class StatisticsControllerTest {
 
     @Test
     @DisplayName("Q1) 2018년, 2019년 각 연도별 합계 금액이 가장 많은 고객을 추출하는 API")
-    void getYearlyTopAmountAccounts() throws Exception {
+    void getYearlyTopAmountAccountsTest() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get(URI_HEADER +"/yearly-top-amount-accounts"))
@@ -66,7 +62,7 @@ class StatisticsControllerTest {
 
     @Test
     @DisplayName("Q2) 2018년 또는 2019년에 거래가 없는 고객을 추출하는 API")
-    void getYearlyNonTransactionAccounts() throws Exception {
+    void getYearlyNonTransactionAccountsTest() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get(URI_HEADER +"/yearly-non-transaction-accounts"))
@@ -79,7 +75,7 @@ class StatisticsControllerTest {
 
     @Test
     @DisplayName("Q3) 연도별 관리점별 거래금액 합계를 구하고 합계금액이 큰 순서로 출력하는 API")
-    void getYearlyAmountSumByBranch() throws Exception {
+    void getYearlyAmountSumByBranchTest() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get(URI_HEADER +"/yearly-amount-sum-by-branch"))
@@ -92,7 +88,7 @@ class StatisticsControllerTest {
 
     @Test
     @DisplayName("Q4) 지점명을 입력하면 해당지점의 거래금액 합계를 출력하는 API")
-    void getTotalAmountSumByBranch() throws Exception {
+    void getTotalAmountSumByBranchTest() throws Exception {
 
         given(statisticsService.getTotalAmountSumByBranch(Mockito.anyString()))
         .willAnswer(invocationOnMock -> new TotalAmountSumBranchVO());

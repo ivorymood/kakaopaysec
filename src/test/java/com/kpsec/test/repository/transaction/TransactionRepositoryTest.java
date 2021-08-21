@@ -65,7 +65,7 @@ class TransactionRepositoryTest {
     }
 
     @Test
-    void getYearlyNetAmountSumByAccounts() {
+    void getYearlyNetAmountSumByAccountsTest() {
 
         // when
         List<TransactionYearlyAmountSumAccountVO> list =

@@ -20,7 +20,7 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long>, S
                     "where rank = 1 " +
                     "order by year, rank ",
             nativeQuery = true)
-    List<StatisticsVO> findAllYearlyAmountAccounts(@Param("years") List<String> years);
+    List<StatisticsVO> getYearlyTopAmountAccounts(@Param("years") List<Integer> years);
 
     List<Statistics> findAllByYearIsInOrderByYear(@Param("years") List<Integer> years);
 }

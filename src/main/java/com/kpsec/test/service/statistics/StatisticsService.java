@@ -39,11 +39,11 @@ public class StatisticsService {
 
     public List<StatisticsVO> getYearlyTopAmountAccounts(List<YearDTO> dtoList) {
 
-        List<String> yearList = new ArrayList<>();
+        List<Integer> yearList = new ArrayList<>();
         for (YearDTO dto : dtoList) {
-            yearList.add(dto.getYear());
+            yearList.add(Integer.parseInt(dto.getYear()));
         }
-        return statisticsRepository.findAllYearlyAmountAccounts(yearList);
+        return statisticsRepository.getYearlyTopAmountAccounts(yearList);
     }
 
     public List<NonTransactionAccountVO> getYearlyNonTransactionAccounts(List<YearDTO> dtoList) {

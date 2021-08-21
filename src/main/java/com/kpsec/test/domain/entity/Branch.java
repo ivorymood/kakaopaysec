@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,9 +15,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(
-        indexes = {@Index(columnList = "branch_code")}
+        name = "branch",
+        indexes = {@Index(name = "idx_branch", unique = true, columnList = "branch_code")}
 )
-@NaturalIdCache
 @SequenceGenerator(
         name = "branch_seq_generator",
         sequenceName = "branch_seq",
@@ -32,12 +30,14 @@ public class Branch extends Base implements Serializable {
     @Column(name = "branch_id")
     private Long id;
 
-    @NaturalId
     @Column(name = "branch_code", unique = true, nullable = false, length = 191)
     private String branchCode;
 
-    @Column(length = 191)
+    @Column(name = "branch_name", length = 191)
     private String branchName;
+
+    @Column(name = "merged_to", length = 191)
+    private String mergedTo;
 
     @Override
     public boolean equals(Object obj) {
@@ -48,11 +48,11 @@ public class Branch extends Base implements Serializable {
             return false;
         }
         Branch that = (Branch) obj;
-        return Objects.equals(branchCode, that.branchCode);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(branchCode);
+        return Objects.hash(id);
     }
 }

@@ -1,15 +1,12 @@
 package com.kpsec.test.domain.entity;
 
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,9 +16,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(
-        indexes = {@Index(columnList = "account_no")}
+        name = "account",
+        indexes = {@Index(name = "idx_account", unique = true, columnList = "account_no")}
 )
-@NaturalIdCache
 @SequenceGenerator(
         name = "account_seq_generator",
         sequenceName = "account_seq",
@@ -34,15 +31,17 @@ public class Account extends Base implements Serializable {
     @Column(name = "account_id")
     private Long id;
 
-    @NaturalId
     @Column(name = "account_no", unique = true, nullable = false, length = 191)
     private String accountNo;
 
-    @Column(length = 191)
+    @Column(name = "account_name", length = 191)
     private String accountName;
 
-    @ManyToOne
-    @JoinColumn(name = "branch_code", nullable = false, referencedColumnName = "branch_code")
+    @Column(name = "branch_code", length = 191)
+    private String branchCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id", nullable = false, referencedColumnName = "branch_id")
     @JsonBackReference
     private Branch branch;
 
@@ -55,11 +54,11 @@ public class Account extends Base implements Serializable {
             return false;
         }
         Account that = (Account) obj;
-        return Objects.equals(accountNo, that.accountNo);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNo);
+        return Objects.hash(id);
     }
 }

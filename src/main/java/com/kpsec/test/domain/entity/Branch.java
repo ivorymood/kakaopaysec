@@ -48,11 +48,11 @@ public class Branch extends Base implements Serializable {
             return false;
         }
         Branch that = (Branch) obj;
-        return Objects.equals(branchCode, that.branchCode);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(branchCode);
+        return Objects.hash(id);
     }
 }

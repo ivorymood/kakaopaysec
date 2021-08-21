@@ -54,11 +54,11 @@ public class Account extends Base implements Serializable {
             return false;
         }
         Account that = (Account) obj;
-        return Objects.equals(accountNo, that.accountNo);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNo);
+        return Objects.hash(id);
     }
 }

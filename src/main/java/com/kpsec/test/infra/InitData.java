@@ -5,6 +5,7 @@ import com.kpsec.test.domain.entity.Account;
 import com.kpsec.test.domain.entity.Branch;
 import com.kpsec.test.domain.entity.Statistics;
 import com.kpsec.test.domain.entity.Transaction;
+import com.kpsec.test.exception.NotFoundException;
 import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
@@ -22,6 +23,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.kpsec.test.exception.NotFoundException.ResourceNotFoundExceptionCode;
 
 @Component
 public class InitData {
@@ -50,7 +53,17 @@ public class InitData {
                                 .branchName(split[1])
                                 .build();
                     }).collect(Collectors.toList());
+
+            // 판교점 분당점 통폐합
             branchRepository.saveAll(branchList);
+            Branch branch_b = branchRepository.findByBranchName("분당점")
+                    .orElseThrow(() -> new NotFoundException(ResourceNotFoundExceptionCode.BRANCH_NOT_FOUND));
+
+            Branch branch_p = branchRepository.findByBranchName("판교점")
+                    .orElseThrow(() -> new NotFoundException(ResourceNotFoundExceptionCode.BRANCH_NOT_FOUND));
+
+            branch_b.setMergedTo(branch_p.getBranchCode());
+            branchRepository.save(branch_b);
         }
     }
 
@@ -110,7 +123,7 @@ public class InitData {
             Account account = accountRepository.findByAccountNo(vo.getAcctNo())
                     .orElseThrow(null);
             Branch branch = branchRepository.findByBranchCode(vo.getBrCode())
-                    .orElseThrow(null);
+                    .orElseThrow(() -> new NotFoundException(ResourceNotFoundExceptionCode.BRANCH_NOT_FOUND));
 
             Statistics statistics = new Statistics();
             statistics.setYear(vo.getYear());

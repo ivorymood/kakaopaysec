@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,6 +35,9 @@ public class Branch extends Base implements Serializable {
 
     @Column(name = "branch_name", length = 191)
     private String branchName;
+
+    @Column(name = "merged_to", length = 191)
+    private String mergedTo;
 
     @Override
     public boolean equals(Object obj) {

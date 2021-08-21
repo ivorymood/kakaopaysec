@@ -2,7 +2,7 @@ package com.kpsec.test.repository.statistics.vo;
 
 import java.math.BigDecimal;
 
-public interface StatisticsInterface {
+public interface StatisticsVO {
 
     Integer getYear();
     String getName();

@@ -1,9 +1,10 @@
 package com.kpsec.test.contoller;
 
 
-import com.kpsec.test.repository.statistics.vo.StatisticsInterface;
+import com.kpsec.test.repository.statistics.vo.StatisticsVO;
 import com.kpsec.test.service.statistics.StatisticsService;
 import com.kpsec.test.service.statistics.dto.YearDTO;
+import com.kpsec.test.service.statistics.vo.AmountSumBranchVO;
 import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
 import com.kpsec.test.service.statistics.vo.YearlyAmountSumBranchVO;
 import io.swagger.annotations.Api;
@@ -31,7 +32,7 @@ public class StatisticsController {
             // consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<StatisticsInterface> getYearlyTopAmountAccounts(
+    public List<StatisticsVO> getYearlyTopAmountAccounts(
            // @RequestBody @Valid List<YearDTO> list
             ) {
 
@@ -79,4 +80,14 @@ public class StatisticsController {
         return statisticsService.getYearlyAmountSumByBranch();
     }
 
+    /*
+    Q4. 분당점과 판교점을 통폐합하여 판교점으로 관리점 이관을 하였습니다. 지점명을 입력하면 해당지점의 거래금액 합계를 출력하는 API 개발
+     */
+    @ApiOperation(value = "amount sum by branch")
+    @GetMapping(value = "/amount-sum-by-branch", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public AmountSumBranchVO getAmountSumByBranch(@RequestParam("brName") String branchName) {
+
+        return statisticsService.getAmountSumByBranch(branchName);
+    }
 }

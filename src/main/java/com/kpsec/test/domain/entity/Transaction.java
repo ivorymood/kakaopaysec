@@ -52,7 +52,7 @@ public class Transaction extends Base {
     @Column(name = "canceled")
     private CancelStatus cancelStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false, referencedColumnName = "account_id")
     @JsonBackReference
     private Account account;

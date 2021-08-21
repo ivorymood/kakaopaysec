@@ -40,7 +40,7 @@ public class Account extends Base implements Serializable {
     @Column(name = "branch_code", length = 191)
     private String branchCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id", nullable = false, referencedColumnName = "branch_id")
     @JsonBackReference
     private Branch branch;

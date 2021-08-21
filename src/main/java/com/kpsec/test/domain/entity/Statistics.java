@@ -49,12 +49,12 @@ public class Statistics extends Base implements Serializable {
     @Column(name = "net_amount_sum")
     private BigDecimal netAmountSum;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false, referencedColumnName = "account_id")
     @JsonBackReference
     private Account account;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id", nullable = false, referencedColumnName = "branch_id")
     @JsonBackReference
     private Branch branch;

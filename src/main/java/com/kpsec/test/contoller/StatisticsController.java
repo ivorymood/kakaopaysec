@@ -26,15 +26,21 @@ public class StatisticsController {
 
     /*
         Q1. 2018년, 2019년 각 연도별 합계 금액이 가장 많은 고객을 추출하는 API 개발.
+
+        연도 리스트를 받아올수 있도록 하는 경우)
+        어노테이션 변경 :
+        @PostMapping(value = "/yearly-top-amount-accounts",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+
+        파라미터 추가 :
+        @RequestBody @Valid List<YearDTO> list
      */
     @ApiOperation(value = "2018, 2019 yearly top amount accounts")
-    @PostMapping(value = "/yearly-top-amount-accounts",
-            // consumes = MediaType.APPLICATION_JSON_VALUE,
+    @GetMapping(value = "/yearly-top-amount-accounts",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<StatisticsVO> getYearlyTopAmountAccounts(
-           // @RequestBody @Valid List<YearDTO> list
-            ) {
+    public List<StatisticsVO> getYearlyTopAmountAccounts() {
 
         String[] testYears = {"2018", "2019"};
         List<YearDTO> list = new ArrayList<>();
@@ -47,16 +53,23 @@ public class StatisticsController {
     }
 
     /*
-    Q2. 2018년 또는 2019년에 거래가 없는 고객을 추출하는 API 개발.
+        Q2. 2018년 또는 2019년에 거래가 없는 고객을 추출하는 API 개발.
+
+        연도 리스트를 받아올수 있도록 하는 경우)
+        어노테이션 변경 :
+        @PostMapping(value = "/yearly-non-transaction-accounts",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+
+        파라미터 추가 :
+        @RequestBody @Valid List<YearDTO> list
     */
     @ApiOperation(value = "2018, 2019 yearly non-transaction accounts")
-    @PostMapping(value = "/yearly-non-transaction-accounts",
-            // consumes = MediaType.APPLICATION_JSON_VALUE,
+    @GetMapping(value = "/yearly-non-transaction-accounts",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<NonTransactionAccountVO> getYearlyNonTransactionAccounts(
-            // @RequestBody @Valid List<YearDTO> list
-    ) {
+    public List<NonTransactionAccountVO> getYearlyNonTransactionAccounts() {
+
         String[] testYears = {"2018", "2019"};
         List<YearDTO> list = new ArrayList<>();
         for (String year : testYears) {
@@ -64,13 +77,12 @@ public class StatisticsController {
             dto.setYear(year);
             list.add(dto);
         }
-
         return statisticsService.getYearlyNonTransactionAccounts(list);
     }
 
 
     /*
-    Q3. 연도별 관리점별 거래금액 합계를 구하고 합계금액이 큰 순서로 출력하는 API 개발.
+        Q3. 연도별 관리점별 거래금액 합계를 구하고 합계금액이 큰 순서로 출력하는 API 개발.
      */
     @ApiOperation(value = "year amount sum by branch")
     @GetMapping(value = "/yearly-amount-sum-by-branch", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -81,10 +93,10 @@ public class StatisticsController {
     }
 
     /*
-    Q4. 분당점과 판교점을 통폐합하여 판교점으로 관리점 이관을 하였습니다. 지점명을 입력하면 해당지점의 거래금액 합계를 출력하는 API 개발
+        Q4. 분당점과 판교점을 통폐합하여 판교점으로 관리점 이관을 하였습니다. 지점명을 입력하면 해당지점의 거래금액 합계를 출력하는 API 개발
      */
-    @ApiOperation(value = "amount sum by branch")
-    @GetMapping(value = "/amount-sum-by-branch", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "total amount sum by branch")
+    @GetMapping(value = "/total-amount-sum-by-branch", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public AmountSumBranchVO getAmountSumByBranch(@RequestParam("brName") String branchName) {
 

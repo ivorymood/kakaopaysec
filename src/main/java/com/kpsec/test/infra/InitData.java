@@ -10,7 +10,7 @@ import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
 import com.kpsec.test.repository.transaction.TransactionRepository;
-import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumByAccountVO;
+import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumAccountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -116,7 +116,7 @@ public class InitData {
 
     @PostConstruct
     private void initStatistics() {
-        List<TransactionYearlyAmountSumByAccountVO> transactionStatisticsList = transactionRepository.getYearlyNetAmountSumByAccounts();
+        List<TransactionYearlyAmountSumAccountVO> transactionStatisticsList = transactionRepository.getYearlyNetAmountSumByAccounts();
 
         List<Statistics> statisticsList = transactionStatisticsList.stream().map(vo -> {
 

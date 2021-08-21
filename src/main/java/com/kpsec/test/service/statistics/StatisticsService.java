@@ -9,7 +9,7 @@ import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
 import com.kpsec.test.repository.statistics.vo.StatisticsVO;
-import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumByBranchVO;
+import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
 import com.kpsec.test.service.statistics.dto.YearDTO;
 import com.kpsec.test.service.statistics.vo.AmountSumBranchVO;
 import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
@@ -75,10 +75,10 @@ public class StatisticsService {
 
     public List<YearlyAmountSumBranchVO> getYearlyAmountSumByBranch() {
 
-        List<StatisticsYearlyAmountSumByBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByAccounts();
+        List<StatisticsYearlyAmountSumBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByAccounts();
 
         Map<Integer, List<AmountSumBranchVO>> map = new HashMap<>();
-        for (StatisticsYearlyAmountSumByBranchVO vo : statisticsList) {
+        for (StatisticsYearlyAmountSumBranchVO vo : statisticsList) {
             if (!map.containsKey(vo.getYear())) {
                 map.put(vo.getYear(), new ArrayList<>());
             }

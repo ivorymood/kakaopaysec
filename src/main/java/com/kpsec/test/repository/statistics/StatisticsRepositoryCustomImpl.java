@@ -3,8 +3,8 @@ package com.kpsec.test.repository.statistics;
 import com.kpsec.test.domain.entity.QBranch;
 import com.kpsec.test.domain.entity.QStatistics;
 import com.kpsec.test.domain.entity.Statistics;
-import com.kpsec.test.repository.statistics.vo.QStatisticsYearlyAmountSumByBranchVO;
-import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumByBranchVO;
+import com.kpsec.test.repository.statistics.vo.QStatisticsYearlyAmountSumBranchVO;
+import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -23,12 +23,12 @@ public class StatisticsRepositoryCustomImpl extends QuerydslRepositorySupport im
     }
 
     @Override
-    public List<StatisticsYearlyAmountSumByBranchVO> getYearlyNetAmountSumByAccounts() {
+    public List<StatisticsYearlyAmountSumBranchVO> getYearlyNetAmountSumByAccounts() {
 
         JPAQueryFactory query = new JPAQueryFactory(this.getEntityManager());
 
-        JPAQuery<StatisticsYearlyAmountSumByBranchVO> jpaQuery = query.select(
-                new QStatisticsYearlyAmountSumByBranchVO(
+        JPAQuery<StatisticsYearlyAmountSumBranchVO> jpaQuery = query.select(
+                new QStatisticsYearlyAmountSumBranchVO(
                         statistics.year,
                         branch.branchName,
                         statistics.branchCode,

@@ -5,8 +5,8 @@ import com.kpsec.test.domain.entity.QAccount;
 import com.kpsec.test.domain.entity.QBranch;
 import com.kpsec.test.domain.entity.QTransaction;
 import com.kpsec.test.domain.entity.Transaction;
-import com.kpsec.test.repository.transaction.vo.QTransactionYearlyAmountSumByAccountVO;
-import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumByAccountVO;
+import com.kpsec.test.repository.transaction.vo.QTransactionYearlyAmountSumAccountVO;
+import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumAccountVO;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -27,12 +27,12 @@ public class TransactionRepositoryImpl extends QuerydslRepositorySupport impleme
     }
 
     @Override
-    public List<TransactionYearlyAmountSumByAccountVO> getYearlyNetAmountSumByAccounts() {
+    public List<TransactionYearlyAmountSumAccountVO> getYearlyNetAmountSumByAccounts() {
 
         JPAQueryFactory query = new JPAQueryFactory(this.getEntityManager());
 
-        JPAQuery<TransactionYearlyAmountSumByAccountVO> jpaQuery = query.select(
-                new QTransactionYearlyAmountSumByAccountVO(
+        JPAQuery<TransactionYearlyAmountSumAccountVO> jpaQuery = query.select(
+                new QTransactionYearlyAmountSumAccountVO(
                         transaction.date.substring(0, 4).castToNum(Integer.class),
                         branch.branchCode,
                         transaction.accountNo,

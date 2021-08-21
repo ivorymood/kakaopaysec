@@ -125,14 +125,14 @@ public class InitData {
             Branch branch = branchRepository.findByBranchCode(vo.getBrCode())
                     .orElseThrow(() -> new NotFoundException(ResourceNotFoundExceptionCode.BRANCH_NOT_FOUND));
 
-            Statistics statistics = new Statistics();
-            statistics.setYear(vo.getYear());
-            statistics.setBranchCode(vo.getBrCode());
-            statistics.setAccountNo(vo.getAcctNo());
-            statistics.setNetAmountSum(vo.getSumAmt());
-            statistics.setAccount(account);
-            statistics.setBranch(branch);
-            return statistics;
+            return Statistics.builder()
+                    .year(vo.getYear())
+                    .branchCode(vo.getBrCode())
+                    .accountNo(vo.getAcctNo())
+                    .netAmountSum(vo.getSumAmt())
+                    .account(account)
+                    .branch(branch)
+                    .build();
         }).collect(Collectors.toList());
         statisticsRepository.saveAll(statisticsList);
     }

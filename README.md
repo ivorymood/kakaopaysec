@@ -30,7 +30,8 @@ gradle wrapper
 
 #### 프로젝트 구성 방식
 
-- <프로젝트 구성 그림>
+![Screen Shot 2021-08-22 at 9 06 46 PM](https://user-images.githubusercontent.com/33947168/130354486-dcf39c54-dfd5-4dc7-be43-76ca88e171e2.png)
+
 
 - 데이터 전송 객체 분리
   - DTO : [프론트 -> 컨트롤러 -> 서비스] 구간
@@ -40,7 +41,7 @@ gradle wrapper
 
 #### 테이블 구성 방식
 
-- <테이블 관계 그림>
+<img width="500" alt="Screen Shot 2021-08-22 at 8 54 41 PM" src="https://user-images.githubusercontent.com/33947168/130354150-a2c023db-4cb6-4e11-9a33-640eb8bd7cab.png">
 
 - 주어진 csv 데이터를 기반으로 각각 account, branch, transaction 3개의 테이블을 생성했습니다.
 - 세 테이블의 연도별/계좌번호별 합계금액을 statistics 테이블에 저장했습니다.

@@ -1,7 +1,7 @@
 package com.kpsec.test.contoller;
 
 import com.kpsec.test.service.statistics.StatisticsService;
-import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
+import com.kpsec.test.vo.TotalAmountSumBranchVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

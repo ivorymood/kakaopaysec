@@ -5,8 +5,8 @@ import com.kpsec.test.domain.entity.Branch;
 import com.kpsec.test.domain.entity.Statistics;
 import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
-import com.kpsec.test.repository.statistics.vo.StatisticsVO;
-import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAmountSumAccountVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchVO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,12 +67,12 @@ class StatisticsRepositoryTest {
         // when
         List<Integer> yearList = new ArrayList<>();
         yearList.add(givenStatistics.getYear());
-        List<StatisticsVO> list =
+        List<YearlyAmountSumAccountVO> list =
                 statisticsRepository.getYearlyTopAmountAccounts(yearList);
 
         // then
         Assertions.assertThat(list).isNotEmpty();
-        StatisticsVO vo = list.get(0);
+        YearlyAmountSumAccountVO vo = list.get(0);
         Assertions.assertThat(vo.getAcctNo())
                 .isEqualTo(givenStatistics.getAccount().getAccountNo());
         Assertions.assertThat(vo.getSumAmt().longValue())
@@ -103,12 +103,12 @@ class StatisticsRepositoryTest {
     void getYearlyNetAmountSumByBranchTest() {
 
         // when
-        List<StatisticsYearlyAmountSumBranchVO> list =
+        List<YearlyAmountSumBranchVO> list =
                 statisticsRepository.getYearlyNetAmountSumByBranch();
 
         // then
         Assertions.assertThat(list).isNotEmpty();
-        StatisticsYearlyAmountSumBranchVO vo = list.get(0);
+        YearlyAmountSumBranchVO vo = list.get(0);
         Assertions.assertThat(vo.getYear()).isEqualTo(givenStatistics.getYear());
         Assertions.assertThat(vo.getBranchName()).isEqualTo(givenStatistics.getBranch().getBranchName());
         Assertions.assertThat(vo.getBranchCode()).isEqualTo(givenStatistics.getBranchCode());

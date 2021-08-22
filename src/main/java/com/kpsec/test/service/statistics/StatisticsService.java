@@ -8,12 +8,12 @@ import com.kpsec.test.exception.NotFoundException.ResourceNotFoundExceptionCode;
 import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
-import com.kpsec.test.repository.statistics.vo.StatisticsVO;
-import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAmountSumAccountVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchVO;
 import com.kpsec.test.service.statistics.dto.YearDTO;
-import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
-import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
-import com.kpsec.test.service.statistics.vo.YearlyAmountSumBranchVO;
+import com.kpsec.test.vo.TotalAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAccountVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchListVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +37,7 @@ public class StatisticsService {
     @Autowired
     private BranchRepository branchRepository;
 
-    public List<StatisticsVO> getYearlyTopAmountAccounts(List<YearDTO> dtoList) {
+    public List<YearlyAmountSumAccountVO> getYearlyTopAmountAccounts(List<YearDTO> dtoList) {
 
         List<Integer> yearList = new ArrayList<>();
         for (YearDTO dto : dtoList) {
@@ -46,7 +46,7 @@ public class StatisticsService {
         return statisticsRepository.getYearlyTopAmountAccounts(yearList);
     }
 
-    public List<NonTransactionAccountVO> getYearlyNonTransactionAccounts(List<YearDTO> dtoList) {
+    public List<YearlyAccountVO> getYearlyNonTransactionAccounts(List<YearDTO> dtoList) {
 
         List<Integer> yearList = new ArrayList<>();
         for (YearDTO dto : dtoList) {
@@ -56,7 +56,7 @@ public class StatisticsService {
         List<Statistics> statisticsList = statisticsRepository.findAllByYearIsInOrderByYear(yearList);
         List<Account> accountList = accountRepository.findAll();
 
-        List<NonTransactionAccountVO> resultList = new ArrayList<>();
+        List<YearlyAccountVO> resultList = new ArrayList<>();
         for (int year : yearList) {
 
             for (Account account : accountList) {
@@ -66,19 +66,19 @@ public class StatisticsService {
                                 && account.getAccountNo().equals(s.getAccount().getAccountNo()))
                         .count();
                 if (count == 0) {
-                    resultList.add(new NonTransactionAccountVO(year, account.getAccountName(), account.getAccountNo()));
+                    resultList.add(new YearlyAccountVO(year, account.getAccountName(), account.getAccountNo()));
                 }
             }
         }
         return resultList;
     }
 
-    public List<YearlyAmountSumBranchVO> getYearlyAmountSumByBranch() {
+    public List<YearlyAmountSumBranchListVO> getYearlyAmountSumByBranch() {
 
-        List<StatisticsYearlyAmountSumBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByBranch();
+        List<YearlyAmountSumBranchVO> statisticsList = statisticsRepository.getYearlyNetAmountSumByBranch();
 
         Map<Integer, List<TotalAmountSumBranchVO>> map = new HashMap<>();
-        for (StatisticsYearlyAmountSumBranchVO vo : statisticsList) {
+        for (YearlyAmountSumBranchVO vo : statisticsList) {
             if (!map.containsKey(vo.getYear())) {
                 map.put(vo.getYear(), new ArrayList<>());
             }
@@ -86,9 +86,9 @@ public class StatisticsService {
                     .add(new TotalAmountSumBranchVO(vo.getBranchName(), vo.getBranchCode(), vo.getNetAmountSum()));
         }
 
-        List<YearlyAmountSumBranchVO> resultList = new ArrayList<>();
+        List<YearlyAmountSumBranchListVO> resultList = new ArrayList<>();
         for (Map.Entry<Integer, List<TotalAmountSumBranchVO>> entry : map.entrySet()) {
-            resultList.add(new YearlyAmountSumBranchVO(entry.getKey(), entry.getValue()));
+            resultList.add(new YearlyAmountSumBranchListVO(entry.getKey(), entry.getValue()));
         }
         return resultList;
     }

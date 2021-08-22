@@ -1,4 +1,4 @@
-package com.kpsec.test.service.statistics.vo;
+package com.kpsec.test.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class YearlyAmountSumBranchVO {
+public class YearlyAmountSumBranchListVO {
 
     private Integer year;
     private List<TotalAmountSumBranchVO> dataList;

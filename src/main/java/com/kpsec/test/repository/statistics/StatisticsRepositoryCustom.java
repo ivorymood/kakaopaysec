@@ -1,6 +1,6 @@
 package com.kpsec.test.repository.statistics;
 
-import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchVO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface StatisticsRepositoryCustom {
 
-    List<StatisticsYearlyAmountSumBranchVO> getYearlyNetAmountSumByBranch();
+    List<YearlyAmountSumBranchVO> getYearlyNetAmountSumByBranch();
 
     Optional<BigDecimal> getTotalSumByBranchCode(String branchCode);
 }

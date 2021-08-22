@@ -1,12 +1,12 @@
 package com.kpsec.test.contoller;
 
 
-import com.kpsec.test.repository.statistics.vo.StatisticsVO;
+import com.kpsec.test.vo.YearlyAmountSumAccountVO;
 import com.kpsec.test.service.statistics.StatisticsService;
 import com.kpsec.test.service.statistics.dto.YearDTO;
-import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
-import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
-import com.kpsec.test.service.statistics.vo.YearlyAmountSumBranchVO;
+import com.kpsec.test.vo.TotalAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAccountVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchListVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class StatisticsController {
     @GetMapping(value = "/yearly-top-amount-accounts",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<StatisticsVO> getYearlyTopAmountAccounts() {
+    public List<YearlyAmountSumAccountVO> getYearlyTopAmountAccounts() {
 
         String[] testYears = {"2018", "2019"};
         List<YearDTO> list = new ArrayList<>();
@@ -68,7 +68,7 @@ public class StatisticsController {
     @GetMapping(value = "/yearly-non-transaction-accounts",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<NonTransactionAccountVO> getYearlyNonTransactionAccounts() {
+    public List<YearlyAccountVO> getYearlyNonTransactionAccounts() {
 
         String[] testYears = {"2018", "2019"};
         List<YearDTO> list = new ArrayList<>();
@@ -87,7 +87,7 @@ public class StatisticsController {
     @ApiOperation(value = "year amount sum by branch")
     @GetMapping(value = "/yearly-amount-sum-by-branch", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<YearlyAmountSumBranchVO> getYearlyAmountSumByBranch() {
+    public List<YearlyAmountSumBranchListVO> getYearlyAmountSumByBranch() {
 
         return statisticsService.getYearlyAmountSumByBranch();
     }

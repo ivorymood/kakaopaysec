@@ -6,7 +6,7 @@ import com.kpsec.test.domain.entity.Branch;
 import com.kpsec.test.domain.entity.Transaction;
 import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
-import com.kpsec.test.repository.transaction.vo.TransactionYearlyAmountSumAccountVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchAccountVO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,12 +68,12 @@ class TransactionRepositoryTest {
     void getYearlyNetAmountSumByAccountsTest() {
 
         // when
-        List<TransactionYearlyAmountSumAccountVO> list =
+        List<YearlyAmountSumBranchAccountVO> list =
                 transactionRepository.getYearlyNetAmountSumByAccounts();
 
         // then
         Assertions.assertThat(list).isNotEmpty();
-        TransactionYearlyAmountSumAccountVO vo = list.stream()
+        YearlyAmountSumBranchAccountVO vo = list.stream()
                 .filter(v ->
                         v.getYear().equals(givenYear)
                         && v.getAcctNo().equals(givenAccount.getAccountNo())).findAny().get();

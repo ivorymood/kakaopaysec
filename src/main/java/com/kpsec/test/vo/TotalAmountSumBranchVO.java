@@ -1,4 +1,4 @@
-package com.kpsec.test.service.statistics.vo;
+package com.kpsec.test.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

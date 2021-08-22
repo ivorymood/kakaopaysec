@@ -1,8 +1,8 @@
-package com.kpsec.test.repository.statistics.vo;
+package com.kpsec.test.vo;
 
 import java.math.BigDecimal;
 
-public interface StatisticsVO {
+public interface YearlyAmountSumAccountVO {
 
     Integer getYear();
     String getName();

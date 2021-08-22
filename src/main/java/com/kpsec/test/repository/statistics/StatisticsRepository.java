@@ -1,7 +1,7 @@
 package com.kpsec.test.repository.statistics;
 
 import com.kpsec.test.domain.entity.Statistics;
-import com.kpsec.test.repository.statistics.vo.StatisticsVO;
+import com.kpsec.test.vo.YearlyAmountSumAccountVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +20,7 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long>, S
                     "where rank = 1 " +
                     "order by year, rank ",
             nativeQuery = true)
-    List<StatisticsVO> getYearlyTopAmountAccounts(@Param("years") List<Integer> years);
+    List<YearlyAmountSumAccountVO> getYearlyTopAmountAccounts(@Param("years") List<Integer> years);
 
     List<Statistics> findAllByYearIsInOrderByYear(@Param("years") List<Integer> years);
 }

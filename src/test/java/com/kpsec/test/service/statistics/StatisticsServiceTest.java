@@ -7,12 +7,12 @@ import com.kpsec.test.infra.InitData;
 import com.kpsec.test.repository.account.AccountRepository;
 import com.kpsec.test.repository.branch.BranchRepository;
 import com.kpsec.test.repository.statistics.StatisticsRepository;
-import com.kpsec.test.repository.statistics.vo.StatisticsVO;
-import com.kpsec.test.repository.statistics.vo.StatisticsYearlyAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAmountSumAccountVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchVO;
 import com.kpsec.test.service.statistics.dto.YearDTO;
-import com.kpsec.test.service.statistics.vo.NonTransactionAccountVO;
-import com.kpsec.test.service.statistics.vo.TotalAmountSumBranchVO;
-import com.kpsec.test.service.statistics.vo.YearlyAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAccountVO;
+import com.kpsec.test.vo.TotalAmountSumBranchVO;
+import com.kpsec.test.vo.YearlyAmountSumBranchListVO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,8 +84,8 @@ class StatisticsServiceTest {
         List<Integer> yearList = new ArrayList<>();
         yearList.add(givenStatistics.getYear());
 
-        List<StatisticsVO> givenList = new ArrayList<>();
-        givenList.add(new StatisticsVO() {
+        List<YearlyAmountSumAccountVO> givenList = new ArrayList<>();
+        givenList.add(new YearlyAmountSumAccountVO() {
             @Override
             public Integer getYear() {
                 return givenStatistics.getYear();
@@ -110,7 +110,7 @@ class StatisticsServiceTest {
                 .willReturn(givenList);
 
         // when
-        List<StatisticsVO> list = statisticsService.getYearlyTopAmountAccounts(dtoList);
+        List<YearlyAmountSumAccountVO> list = statisticsService.getYearlyTopAmountAccounts(dtoList);
 
         // then
         Assertions.assertThat(list).isEqualTo(givenList);
@@ -135,12 +135,12 @@ class StatisticsServiceTest {
         accountList.add(givenAccount);
         given(accountRepository.findAll()).willReturn(accountList);
 
-        List<NonTransactionAccountVO> givenList = new ArrayList<>();
-        givenList.add(new NonTransactionAccountVO(givenStatistics.getYear(),
+        List<YearlyAccountVO> givenList = new ArrayList<>();
+        givenList.add(new YearlyAccountVO(givenStatistics.getYear(),
                 givenAccount.getAccountName(), givenAccount.getAccountNo()));
 
         // when
-        List<NonTransactionAccountVO> list =
+        List<YearlyAccountVO> list =
                 statisticsService.getYearlyNonTransactionAccounts(dtoList);
 
         // then
@@ -151,8 +151,8 @@ class StatisticsServiceTest {
     void getYearlyAmountSumByBranchTest() {
 
         // given
-        List<StatisticsYearlyAmountSumBranchVO> givenList = new ArrayList<>();
-        givenList.add(new StatisticsYearlyAmountSumBranchVO(
+        List<YearlyAmountSumBranchVO> givenList = new ArrayList<>();
+        givenList.add(new YearlyAmountSumBranchVO(
                 givenStatistics.getYear(),
                 givenStatistics.getBranch().getBranchName(),
                 givenStatistics.getBranchCode(),
@@ -162,7 +162,7 @@ class StatisticsServiceTest {
         given(statisticsRepository.getYearlyNetAmountSumByBranch()).willReturn(givenList);
 
         // when
-        List<YearlyAmountSumBranchVO> list = statisticsService.getYearlyAmountSumByBranch();
+        List<YearlyAmountSumBranchListVO> list = statisticsService.getYearlyAmountSumByBranch();
 
         // then
         Assertions.assertThat(list.get(0).getYear())

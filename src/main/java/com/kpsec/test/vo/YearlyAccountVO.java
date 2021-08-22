@@ -1,4 +1,4 @@
-package com.kpsec.test.service.statistics.vo;
+package com.kpsec.test.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class NonTransactionAccountVO {
+public class YearlyAccountVO {
 
     private Integer year;
     private String name;

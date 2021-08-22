@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Persistence</ID>
+  <OriginalElement>JavaeeElement:/9c9eef18/entityManagerFactory/kakaopaysec.main/jpa/JPA/PersistenceModel</OriginalElement>
+  <nodes>
+    <node x="555.25" y="104.0">AbstractAuditable#jar:///Users/limhyun-yu/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.4.8/3b828cf72c68f3affc75809229fc729ab530c6af/spring-data-jpa-2.4.8.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class</node>
+    <node x="0.0" y="466.0">Transaction#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Transaction.java</node>
+    <node x="104.56818181818184" y="296.0">Account#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Account.java</node>
+    <node x="124.25378787878788" y="0.0">Base#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Base.java</node>
+    <node x="216.87878787878788" y="126.0">Branch#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Branch.java</node>
+    <node x="501.0" y="0.0">AbstractPersistable#jar:///Users/limhyun-yu/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.4.8/3b828cf72c68f3affc75809229fc729ab530c6af/spring-data-jpa-2.4.8.jar!/org/springframework/data/jpa/domain/AbstractPersistable.class</node>
+    <node x="702.0" y="12.0">null#null</node>
+    <node x="236.0" y="488.0">Statistics#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Statistics.java</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Branch#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Branch.java" target="Base#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Base.java">
+      <point x="0.0" y="-60.0" />
+      <point x="301.3787878787879" y="106.0" />
+      <point x="283.0037878787879" y="106.0" />
+      <point x="31.75" y="38.0" />
+    </edge>
+    <edge source="Account#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Account.java" target="Base#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Base.java">
+      <point x="-44.0" y="-60.0" />
+      <point x="148.56818181818184" y="106.0" />
+      <point x="219.50378787878788" y="106.0" />
+      <point x="-31.75" y="38.0" />
+    </edge>
+    <edge source="AbstractAuditable#jar:///Users/limhyun-yu/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.4.8/3b828cf72c68f3affc75809229fc729ab530c6af/spring-data-jpa-2.4.8.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class" target="null#null">
+      <point x="47.5" y="-38.0" />
+      <point x="697.75" y="79.0" />
+      <point x="709.0" y="79.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Account#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Account.java" target="Branch#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Branch.java">
+      <point x="44.0" y="-60.0" />
+      <point x="236.56818181818184" y="271.0" />
+      <point x="259.1287878787879" y="271.0" />
+      <point x="-42.25" y="60.0" />
+    </edge>
+    <edge source="Statistics#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Statistics.java" target="Branch#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Branch.java">
+      <point x="1.4210854715202004E-14" y="-71.0" />
+      <point x="346.0" y="441.0" />
+      <point x="343.6287878787879" y="441.0" />
+      <point x="42.24999999999999" y="60.0" />
+    </edge>
+    <edge source="Transaction#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Transaction.java" target="Account#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Account.java">
+      <point x="54.0" y="-93.0" />
+      <point x="162.0" y="441.0" />
+      <point x="148.56818181818184" y="441.0" />
+      <point x="-44.0" y="60.0" />
+    </edge>
+    <edge source="Transaction#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Transaction.java" target="Base#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Base.java">
+      <point x="-54.0" y="-93.0" />
+      <point x="54.0" y="441.0" />
+      <point x="84.05681818181822" y="441.0" />
+      <point x="84.05681818181822" y="96.0" />
+      <point x="156.00378787878788" y="96.0" />
+      <point x="-95.25" y="38.0" />
+    </edge>
+    <edge source="Statistics#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Statistics.java" target="Account#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Account.java">
+      <point x="-73.33333333333331" y="-71.0" />
+      <point x="272.6666666666667" y="441.0" />
+      <point x="236.56818181818184" y="441.0" />
+      <point x="44.0" y="60.0" />
+    </edge>
+    <edge source="Statistics#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Statistics.java" target="Base#file:///Users/limhyun-yu/IdeaProjects/kakaopaysec/src/main/java/com/kpsec/test/domain/entity/Base.java">
+      <point x="73.33333333333333" y="-71.0" />
+      <point x="419.3333333333333" y="441.0" />
+      <point x="396.3787878787879" y="441.0" />
+      <point x="396.3787878787879" y="106.0" />
+      <point x="346.5037878787879" y="106.0" />
+      <point x="95.25" y="38.0" />
+    </edge>
+    <edge source="AbstractAuditable#jar:///Users/limhyun-yu/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.4.8/3b828cf72c68f3affc75809229fc729ab530c6af/spring-data-jpa-2.4.8.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class" target="AbstractPersistable#jar:///Users/limhyun-yu/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.4.8/3b828cf72c68f3affc75809229fc729ab530c6af/spring-data-jpa-2.4.8.jar!/org/springframework/data/jpa/domain/AbstractPersistable.class">
+      <point x="-47.5" y="-38.0" />
+      <point x="602.75" y="79.0" />
+      <point x="591.5" y="79.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="373.0" y="326.0" />
+  <SelectedNodes>
+    <node>AbstractAuditable#jar:///Users/limhyun-yu/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.4.8/3b828cf72c68f3affc75809229fc729ab530c6af/spring-data-jpa-2.4.8.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Embeddables</Category>
+    <Category>Superclasses</Category>
+  </Categories>
+</Diagram>
+

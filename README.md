@@ -39,9 +39,9 @@ gradle wrapper
 
 </br>
 
-#### 테이블 구성 방식
+#### Entity 구성 방식
 
-<img width="500" alt="Screen Shot 2021-08-22 at 8 54 41 PM" src="https://user-images.githubusercontent.com/33947168/130354150-a2c023db-4cb6-4e11-9a33-640eb8bd7cab.png">
+<img width="400" alt="entityManagerFactory(EntityManagerFactoryBuilder)" src="https://user-images.githubusercontent.com/33947168/130830365-6f85b860-18f2-4d9f-8d92-c8628ffa7c43.png">
 
 - 주어진 csv 데이터를 기반으로 각각 account, branch, transaction 3개의 테이블을 생성했습니다.
 - 세 테이블의 연도별/계좌번호별 합계금액을 statistics 테이블에 저장했습니다.
